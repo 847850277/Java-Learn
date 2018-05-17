@@ -1,6 +1,7 @@
 package com.zhengpengcoder.java8;
 
 import com.zhengpengcoder.java8.condition.LanguageProjectCondition;
+import com.zhengpengcoder.java8.condition.MyThread;
 import com.zhengpengcoder.java8.condition.ProjectConditionInterface;
 import com.zhengpengcoder.java8.condition.StarProjectCondition;
 
@@ -91,6 +92,16 @@ public class LambdaTest {
         for (Project project : filters) {
             System.out.println(project);
         }
+
+        Runnable task = () -> System.out.println("hello world");
+        Thread thread = new Thread(task);
+        thread.run();
+
+
+        MyThread myThread = new MyThread();
+        myThread.run();;
+
+
 
     }
 }
