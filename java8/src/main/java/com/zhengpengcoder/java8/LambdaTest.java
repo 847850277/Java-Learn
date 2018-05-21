@@ -1,9 +1,7 @@
 package com.zhengpengcoder.java8;
 
-import com.zhengpengcoder.java8.condition.LanguageProjectCondition;
-import com.zhengpengcoder.java8.condition.MyThread;
-import com.zhengpengcoder.java8.condition.ProjectConditionInterface;
-import com.zhengpengcoder.java8.condition.StarProjectCondition;
+import com.zhengpengcoder.java8.lession1.MyThread;
+import com.zhengpengcoder.java8.lession1.ProjectConditionInterface;
 
 import java.util.ArrayList;
 import java.util.List;

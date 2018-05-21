@@ -1,4 +1,4 @@
-package com.zhengpengcoder.java8.condition;
+package com.zhengpengcoder.java8.lession1;
 
 /**
  * Created by zhengpeng on 2018/5/17.

@@ -1,4 +1,4 @@
-package com.zhengpengcoder.java8.condition;
+package com.zhengpengcoder.java8.lession1;
 
 import com.zhengpengcoder.java8.Project;
 import lombok.Getter;
