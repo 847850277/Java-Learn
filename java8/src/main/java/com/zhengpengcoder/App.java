@@ -144,6 +144,8 @@ public class App
 
 
     public static int maxProduct(int[] nums) {
+           System.out.println(nums.length);
+
             Map<String,Integer> resultMap = new HashMap<>();
             if(nums.length >= 2){
                 //TODO 二维数组
