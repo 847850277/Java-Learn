@@ -49,22 +49,14 @@ public class App
         int a1 = -1;
         int a2 = 0;
         //System.out.println(a1<a2);
-        int[] arrays = {-2,3,-4,5};
+        int[] arrays = {2,-1,1,1};
         //System.out.println(minMoves(arrays));
         System.out.println(maxProduct(arrays));
 
 
     }
 
-    private static void getSumJ(int j, int[] arrays) {
 
-        int result = 1;
-        for(int m =0;m<j;m++){
-            result *= arrays[m + 1 + 1];
-        }
-        System.out.println("result:" + result );
-        //return result;
-    }
 
     public static int[] twoSum(int[] nums, int target) {
         int [] result = new int[2];
@@ -142,84 +134,79 @@ public class App
 
     public static int maxProduct(int[] nums) {
         if(nums.length > 2){
-
-            //int [][][] arrays=new int[nums.length-1][nums.length-2][2];//在栈空间创建一个空间
-
             //TODO 二维数组
             int[][] result1 = new int[nums.length-1][];
-            System.out.println("二维数字外围："+result1.length);
             //TODO 二维数组 初始化
             for(int i =0;i<result1.length;i++){
                 result1[i] = new int[nums.length-1-i];
             }
             //TODO 二维数组 赋值
-//            for(int i =0;i<result1.length;i++){
-//
-//                //外层数组
-//                //for()
-////                result1[i] =
-////                for (int j=0;j<result1[i].length;j++){
-////
-////                    result1[i][j] = nums[i] * nums[i + 1];
-////                }
-//            }
-
-            result1 = setValueForArray(result1,nums);
-
-            System.out.println(result1);
-
-
-            //2个乘积
-            int[] result = new int[nums.length-1];
-            //结果数组
-            for(int i =0;i<nums.length-1;i++){
-                result[i] = nums[i] * nums[i+1];
-            }
-            /*
-            //3个乘积
-            int[] result3 = new int[nums.length-1-1];
-            for(int i =0;i<nums.length-1-1;i++){
-                result3[i] = nums[i] * nums[i+1] * nums[i+2];
-            }
-            //4个乘积
-            int[] result4 = new int[nums.length-1-1-1];
-            for(int i =0;i<nums.length-1-1-1;i++){
-                result4[i] = nums[i] * nums[i+1] * nums[i+2] * nums[i+3];
-            }
-            //n个乘积
-            int[] resultn = new int[nums.length-n + 1];
-            for(int i =0;i<nums.length-n + 1;i++){
-                resultn[i] = nums[i] * nums[i+1] * nums[i+2] * nums[i+3] * nums[i+n-1];
-            }
-            */
-
-
-
-            //找出最大的 冒泡排序
-            for(int i =0;i<result.length;i++){
-                for(int j =0;j<result.length;j++){
-                    if(result[i]>result[j]){
-                        int temp = result[i];
-                        result[i] = result[j];
-                        result[j] = temp;
+            for(int j=0;j<nums.length -1;j++){
+                for(int i=0;i<nums.length-1-j;i++){
+                    int result = 1;
+                    for(int m =0;m<j;m++){
+                        result *= nums[m + 1 + 1 + i];
                     }
+                    result1[j][i] = result * nums[i] * nums[i + 1];
                 }
             }
-            if(result[0] > 0){
-                return result[0];
-            }else {
-                //return 0; 找出原来数组最大的数
-                for(int i =0;i<nums.length;i++){
-                    for(int j =0;j<nums.length;j++){
-                        if(nums[i]<nums[j]){
-                            int temp = nums[i];
-                            nums[i] = nums[j];
-                            nums[j] = temp;
-                        }
-                    }
-                    return nums[0];
+            //遍历二维数组找最大
+            int sum = 0;
+            for (int[] ints : result1) {
+                for (int anInt : ints) {
+                    sum++;
                 }
             }
+            int[] waitForSort = new int[sum] ;
+            sum = 0;
+            for (int[] ints : result1) {
+                for (int anInt : ints) {
+                    waitForSort[sum] = anInt;
+                    sum++;
+                }
+            }
+
+            //冒泡拍序
+           for(int i=0;i<waitForSort.length;i++){
+               for(int j=0;j<waitForSort.length;j++){
+                   if(waitForSort[i]>waitForSort[j]){
+                       int temp = waitForSort[i];
+                       waitForSort[i] = waitForSort[j];
+                       waitForSort[j] = temp;
+                   }
+               }
+           }
+           if(waitForSort[0] > 0){
+               for(int i =0;i<nums.length;i++){
+                   for(int j =0;j<nums.length;j++){
+                       if(nums[i]>nums[j]){
+                           int temp = nums[i];
+                           nums[i] = nums[j];
+                           nums[j] = temp;
+                       }
+                   }
+               }
+
+               if(nums[0] > waitForSort[0]){
+                   return nums[0];
+               }else {
+                   return waitForSort[0];
+               }
+
+           }else {
+               //return 0; 找出原来数组最大的数
+               for(int i =0;i<nums.length;i++){
+                   for(int j =0;j<nums.length;j++){
+                       if(nums[i]<nums[j]){
+                           int temp = nums[i];
+                           nums[i] = nums[j];
+                           nums[j] = temp;
+                       }
+                   }
+                   return nums[0];
+               }
+           }
+
         }else if(nums.length == 2){
             if(nums[0] * nums[1] >0){
                 return nums[0] * nums[1];
@@ -243,52 +230,18 @@ public class App
      * @return
      */
     private static int[][] setValueForArray(int[][] result1, int[] nums) {
-        System.out.println("开始给二维数组赋值");
-
-
-
-        //2个香橙赋值
-//        for(int i=0;i<nums.length-1;i++){
-//            result1[0][i] = nums[i] * nums[i+1];
-//        }
-//        //3个香橙赋值
-//        for(int i=0;i<nums.length-1-1;i++){
-//            result1[1][i] = nums[i] * nums[i + 1] * nums[i + 1 + 1];
-//        }
-//        //4个香橙赋值
-//        for(int i=0;i<nums.length-1-1-1;i++){
-//            result1[2][i] = nums[i] * nums[i + 1] * nums[i + 1 + 1] * nums[i + 1 + 1 + 1];
-//        }
-
 
         for(int j=0;j<nums.length -1;j++){
             for(int i=0;i<nums.length-1-j;i++){
-
-                //第一次循环
-//                if(j == 0){
-//                    result1[j][i] = nums[i] * nums[i +1];
-//                }else if(j == 1){
-//                    result1[j][i] = nums[i] * nums[i +1] * nums[i +1 + j];
-//                }else if(j == 1+1){
-//                    result1[j][i] = nums[i] * nums[i+ 1] * nums[i + 1 + 1] * nums[i + 1 + j];
-//                }else if(j == 3){
-//                    result1[j][i] = nums[i] * nums[i+ 1] * nums[i + 1 + 1] * nums[i + 1 + 1 + 1] *nums[i + 1 + j] ;
-//                }
-
                 result1[j][i] = getValue(nums,j,i);
-
-
             }
 
         }
-
 
         return result1;
     }
 
     private static int getValue(int[] nums, int j, int i) {
-
-
 
 //        int result =1;
 //        //arrays[]
@@ -306,13 +259,11 @@ public class App
 //        }else if(j == 3){
 //            return nums[i] * nums[i+ 1] * nums[i + 1 + 1] * nums[i + 1 + 1 + 1] *nums[i + 1 + j] ;
 //        }
-
         int result = 1;
         for(int m =0;m<j;m++){
             result *= nums[m + 1 + 1];
         }
         result = result * nums[i] * nums[i + 1];
-
         return result;
 
     }
